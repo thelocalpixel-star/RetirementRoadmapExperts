@@ -9,6 +9,7 @@ A polished, responsive marketing and education website for Retirement Roadmap Ex
 - Search-friendly blog library with nine individual articles
 - Responsive desktop, tablet, and mobile layouts
 - Structured data, social-sharing metadata, semantic headings, and descriptive image text
+- Production `robots.txt`, `sitemap.xml`, absolute canonical URLs, and index-friendly metadata
 - Cloudflare R2-hosted video with muted inline autoplay support
 - Links to the Risk Analysis Questionnaire and YouTube/podcast channel
 - Reusable blog generator for consistent future updates
@@ -20,6 +21,9 @@ Meridian/
 ├── index.html                  # Main website
 ├── schedule.html               # Consultation scheduling page
 ├── blogs.html                  # Blog library
+├── robots.txt                  # Search crawler rules and sitemap location
+├── sitemap.xml                 # Production URL index for search engines
+├── CNAME                       # GitHub Pages custom domain
 ├── blog/                       # Generated individual blog pages
 ├── assets/
 │   ├── css/
@@ -84,7 +88,7 @@ Do not make long-term article edits only in the generated HTML pages; the next g
 | Risk Analysis Questionnaire | [The Financial HQ](https://thefinancialhq.com/comra-RRE) |
 | YouTube and podcast | [Retirement Roadmap Experts](https://www.youtube.com/@RetirementRoadmapExperts) |
 | Homepage video | Cloudflare R2 public asset referenced in `index.html` |
-| Retirement book | Local `book.pdf` download gated by the homepage name/email form; FormSubmit notifies `thelocalpixel@gmail.com` |
+| Retirement book | Local `book.pdf` download gated by the homepage name/email form; FormSubmit notifies `rboeck@retirementroadmapexperts.com` |
 | Retirement book cover | `assets/images/from-accumulation-to-income-cover.jpg` |
 
 External links open in a new tab where appropriate and use `rel="noopener"`.
@@ -97,16 +101,18 @@ Browsers can still suppress autoplay in Low Power Mode, Data Saver modes, or und
 
 ## SEO checklist
 
-Before deploying to the final domain:
+Before deploying:
 
 - Confirm every page has a unique title and meta description.
-- Replace any placeholder or malformed canonical-domain values in `index.html` with the final production domain.
-- Use absolute production URLs for canonical and social-sharing image metadata.
-- Add or update `sitemap.xml` and `robots.txt` after the final domain is confirmed.
+- Confirm canonical URLs use `https://retirementroadmapexperts.com`.
+- Keep `sitemap.xml` updated whenever pages are added, removed, or renamed.
+- Keep `robots.txt` pointing to `https://retirementroadmapexperts.com/sitemap.xml`.
+- Use absolute production URLs for canonical, Open Graph, Twitter, and structured-data image metadata.
 - Keep one descriptive `<h1>` per page.
 - Compress new images and preserve meaningful `alt` text.
 - Rebuild blogs after changing shared article metadata.
 - Review financial figures, tax rules, and Social Security references for freshness before publishing.
+- Submit `https://retirementroadmapexperts.com/sitemap.xml` in Google Search Console after deployment.
 
 ## Deployment
 
