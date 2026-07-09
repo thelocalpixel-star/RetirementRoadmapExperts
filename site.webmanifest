@@ -1,0 +1,15 @@
+{
+  "name": "Retirement Roadmap Experts",
+  "short_name": "RRE",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#080f1e",
+  "background_color": "#080f1e",
+  "display": "standalone"
+}
