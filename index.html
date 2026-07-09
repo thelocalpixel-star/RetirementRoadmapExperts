@@ -5463,7 +5463,51 @@
       Services.</p>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
+    const revealImmediately = () => {
+      document.querySelectorAll('.hero-eyebrow,.hero-h1,.hero-sub-text,.hero-actions,.hero-trust,#heroViz,.reveal,.reveal-left,.reveal-right,.comp-row.reveal,.gloss-card,.auth-card,.faq-item,.cred-logo').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    };
+    const applyVars = (target, vars = {}) => {
+      const targets = typeof target === 'string' ? document.querySelectorAll(target) : Array.isArray(target) ? target : [target];
+      targets.forEach(el => {
+        if (!el || !el.style) return;
+        if ('opacity' in vars) el.style.opacity = vars.opacity;
+        if ('x' in vars || 'y' in vars) el.style.transform = 'none';
+        if (vars.attr) Object.entries(vars.attr).forEach(([key, value]) => el.setAttribute(key, value));
+      });
+      if (typeof vars.onComplete === 'function') vars.onComplete();
+    };
+    if (!window.gsap) {
+      window.gsap = {
+        registerPlugin() { },
+        timeline() {
+          const api = { to(target, vars) { applyVars(target, vars); return api; } };
+          return api;
+        },
+        to(target, vars) { applyVars(target, vars); },
+        from(target, vars) { applyVars(target, { ...vars, opacity: 1 }); },
+        fromTo(target, fromVars, toVars) { applyVars(target, toVars); },
+        utils: { toArray(selector) { return Array.from(document.querySelectorAll(selector)); } }
+      };
+    }
+    if (!window.ScrollTrigger) {
+      window.ScrollTrigger = { create(config = {}) { if (typeof config.onEnter === 'function') config.onEnter(); } };
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', revealImmediately, { once: true });
+    } else {
+      revealImmediately();
+    }
+
+    var gsap = window.gsap;
+    var ScrollTrigger = window.ScrollTrigger;
     gsap.registerPlugin(ScrollTrigger);
 
     /* ── HERO CANVAS PARTICLES ── */
